@@ -1,8 +1,7 @@
 # Santo Soka Academy — Website
 
-Official website for **Santo Soka Academy**, the youth development arm of
-**Dagoretti Green Santos FC** — a Kenyan football club based in the
-Dagoretti region of Nairobi.
+Official website for **Santo Soka Academy** — a standalone Kenyan football
+academy founded in 2010, based in the Dagoretti region of Nairobi.
 
 The site covers every age group the academy runs, from **Under-6** all
 the way up to the **Senior team**.
@@ -43,21 +42,14 @@ santo-soka-academy/
 └── images/
 ```
 
-## Swapping in your own photos
+## Swapping in more photos
 
-The site currently uses football-themed placeholder images (stock photography)
-so you can go live immediately. To replace them with real photos from
-[@santos_soka_academy](https://www.instagram.com/santos_soka_academy/):
+Real academy photos live under `images/`, `images/teams/` and
+`images/coaches/`. To add or replace:
 
-1. Drop your images into `images/` (e.g. `images/u6.jpg`, `images/senior.jpg`,
-   `images/gallery/match-1.jpg`).
-2. Find the matching `<img src="https://images.unsplash.com/…">` in the HTML
-   and change it to `src="images/your-photo.jpg"`.
-
-That's it — no code changes needed.
+1. Drop new images into the relevant folder.
+2. Update the matching `<img src="...">` path in the HTML.
 
 ## Credits
 
-- Club & academy info: [FKF Nairobi West — Dagoretti Green Santos](https://fkfnairobiwest.ke/team/dagoretti-green-santos)
 - Social: [@santos_soka_academy](https://www.instagram.com/santos_soka_academy/)
-- Placeholder imagery: Unsplash (royalty-free)
