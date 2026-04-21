@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gallery — Santo Soka Academy</title>
+    <meta name="description" content="Photos from Santo Soka Academy training sessions, matches and community days." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230f6b32'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-family='Arial,sans-serif' font-size='22' font-weight='800' fill='white'%3ESS%3C/text%3E%3C/svg%3E" />
+    <style>
+      .filters { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin: 0 0 28px; }
+      .filters button {
+        border: 1px solid var(--border);
+        background: #fff;
+        color: var(--green-900);
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all .15s ease;
+      }
+      .filters button:hover { border-color: var(--green-700); }
+      .filters button.active { background: var(--green-700); color: #fff; border-color: var(--green-700); }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav">
+        <a href="index.html" class="brand">
+          <div class="brand-badge">SS</div>
+          <div class="brand-name">Santo Soka Academy<small>Dagoretti • Nairobi</small></div>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">≡</button>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="teams.html">Teams</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html" class="cta-btn">Join Trials</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <section class="page-hero">
+      <div class="container">
+        <div class="crumbs"><a href="index.html">Home</a> / Gallery</div>
+        <h1>Life at Santo Soka</h1>
+        <p>Training, matchdays and moments from around the academy. Swap these placeholder shots with your own photos from the <a href="https://www.instagram.com/santos_soka_academy/" target="_blank" rel="noopener">@santos_soka_academy</a> Instagram by dropping them into <code>images/gallery/</code>.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="filters" id="filters">
+          <button data-f="all" class="active">All</button>
+          <button data-f="training">Training</button>
+          <button data-f="match">Matchday</button>
+          <button data-f="youth">Youth Teams</button>
+          <button data-f="senior">Senior Team</button>
+        </div>
+
+        <div class="gallery" id="gallery">
+          <figure data-tag="training"><img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=70" alt="Training session" /><figcaption>Technical training</figcaption></figure>
+          <figure data-tag="match"><img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=800&q=70" alt="Matchday celebration" /><figcaption>Matchday celebration</figcaption></figure>
+          <figure data-tag="youth"><img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=800&q=70" alt="Young players" /><figcaption>U6 Little Stars</figcaption></figure>
+          <figure data-tag="training"><img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=800&q=70" alt="Small-sided game" /><figcaption>Small-sided games</figcaption></figure>
+          <figure data-tag="match"><img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=800&q=70" alt="Match action" /><figcaption>Match action</figcaption></figure>
+          <figure data-tag="youth"><img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=800&q=70" alt="Youth match" /><figcaption>U12 Futures</figcaption></figure>
+          <figure data-tag="training"><img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=70" alt="Training drill" /><figcaption>Drill work</figcaption></figure>
+          <figure data-tag="senior"><img src="https://images.unsplash.com/photo-1624880357913-a8539238245b?auto=format&fit=crop&w=800&q=70" alt="Senior team" /><figcaption>Dagoretti Green Santos</figcaption></figure>
+          <figure data-tag="youth"><img src="https://images.unsplash.com/photo-1552667466-07770ae110d0?auto=format&fit=crop&w=800&q=70" alt="U16 team" /><figcaption>U16 Academy</figcaption></figure>
+          <figure data-tag="match"><img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=800&q=70" alt="Goal celebration" /><figcaption>Goal!</figcaption></figure>
+          <figure data-tag="senior"><img src="https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=70" alt="Senior line-up" /><figcaption>Pre-match line-up</figcaption></figure>
+          <figure data-tag="training"><img src="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?auto=format&fit=crop&w=800&q=70" alt="Ball mastery" /><figcaption>Ball mastery</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand">
+              <div class="brand-badge">SS</div>
+              <div class="brand-name">Santo Soka Academy<small>Dagoretti • Nairobi</small></div>
+            </div>
+            <p style="color:#cde4d4; margin-top:14px; max-width:34ch;">Youth arm of Dagoretti Green Santos FC.</p>
+          </div>
+          <div><h4>Explore</h4><ul><li><a href="about.html">About</a></li><li><a href="teams.html">Teams</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+          <div><h4>Age Groups</h4><ul><li><a href="teams.html#u6">Under-6 • Under-8</a></li><li><a href="teams.html#u10">Under-10 • Under-12</a></li><li><a href="teams.html#u14">Under-14 • Under-16</a></li><li><a href="teams.html#u18">Under-18 • Senior</a></li></ul></div>
+          <div><h4>Follow</h4>
+            <div class="socials">
+              <a href="https://www.instagram.com/santos_soka_academy/" target="_blank" rel="noopener">IG</a>
+              <a href="https://fkfnairobiwest.ke/team/dagoretti-green-santos" target="_blank" rel="noopener">FKF</a>
+              <a href="mailto:info@santosoka.co.ke">✉</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div>© <span id="year"></span> Santo Soka Academy.</div>
+          <div>Proudly based in Dagoretti, Nairobi 🇰🇪</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const filters = document.getElementById("filters");
+      const gallery = document.getElementById("gallery");
+      filters.addEventListener("click", (e) => {
+        const btn = e.target.closest("button"); if (!btn) return;
+        filters.querySelectorAll("button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const f = btn.dataset.f;
+        gallery.querySelectorAll("figure").forEach(fig => {
+          fig.style.display = (f === "all" || fig.dataset.tag === f) ? "" : "none";
+        });
+      });
+    </script>
+  </body>
+</html>
