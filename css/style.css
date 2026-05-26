@@ -593,6 +593,100 @@ form.contact textarea { min-height: 120px; resize: vertical; }
 }
 .socials a:hover { background: var(--gold); color: #2a1f00; text-decoration: none; }
 
+/* Achievement Banner */
+.achievement-section { padding: 48px 0; }
+.achievement-banner {
+  background: linear-gradient(135deg, #fefce8, #fef9c3);
+  border: 2px solid var(--gold);
+  border-radius: 22px;
+  padding: 40px;
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(244, 196, 48, 0.15);
+}
+.achievement-banner::before {
+  content: "";
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244,196,48,0.25), transparent 70%);
+}
+.achievement-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+  width: 72px; height: 72px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 16px rgba(244, 196, 48, 0.4);
+}
+.achievement-content { position: relative; z-index: 1; }
+.achievement-label {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--green-700);
+  background: rgba(15, 107, 50, 0.1);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.achievement-content h2 {
+  color: var(--green-900);
+  margin-bottom: 12px;
+}
+.achievement-content p {
+  color: #3a4a3e;
+  max-width: 60ch;
+}
+.achievement-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(244, 196, 48, 0.4);
+}
+.achievement-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.achievement-detail strong {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--green-700);
+}
+.achievement-detail span {
+  font-weight: 600;
+  color: var(--green-900);
+  font-size: 0.95rem;
+}
+@media (max-width: 720px) {
+  .achievement-banner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 28px;
+  }
+  .achievement-details {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .achievement-details {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Utilities */
 .mt-0 { margin-top: 0 !important; }
 .mb-0 { margin-bottom: 0 !important; }
