@@ -14,12 +14,14 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [dashRes, incomeRes] = await Promise.all([
-          api.get('/dashboard'),
-          api.get('/reports/income'),
-        ]);
+        const dashRes = await api.get('/dashboard');
         setData(dashRes.data);
-        setIncomeData(incomeRes.data.monthlyData || []);
+        try {
+          const incomeRes = await api.get('/reports/income');
+          setIncomeData(incomeRes.data.monthlyData || []);
+        } catch (e) {
+          console.warn('Income report not available');
+        }
       } catch (err) {
         console.error('Dashboard error:', err);
       } finally {

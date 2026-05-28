@@ -5,7 +5,7 @@ const { authenticate, authorize } = require('../middleware/auth');
 
 const router = express.Router();
 
-router.get('/income', authenticate, authorize('admin'), async (req, res) => {
+router.get('/income', authenticate, authorize('admin', 'caretaker'), async (req, res) => {
   try {
     const { year } = req.query;
     const targetYear = parseInt(year) || new Date().getFullYear();
