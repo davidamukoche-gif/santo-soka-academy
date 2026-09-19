@@ -7,18 +7,31 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "api:dev": "tsx watch server/index.ts",
+    "api:start": "tsx server/index.ts",
+    "db:migrate": "tsx server/migrate.ts"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
+    "cors": "latest",
+    "dotenv": "^18.0.0",
+    "express": "latest",
     "lucide-react": "latest",
+    "pg": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "vite": "latest"
+    "vite": "latest",
+    "zod": "latest"
   },
   "devDependencies": {
+    "@types/cors": "latest",
+    "@types/express": "latest",
+    "@types/node": "latest",
+    "@types/pg": "latest",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "tsx": "latest",
     "typescript": "latest"
   }
 }
