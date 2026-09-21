@@ -1,44 +1,160 @@
-import { Pool, type PoolClient, type QueryResultRow } from 'pg';
-import { createHash, randomBytes } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
+import { and, asc, desc, eq } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/mysql2";
+import { InsertFixture, InsertSeniorPlayer, InsertTrialRegistration, InsertUser, fixtures, seniorPlayers, trialRegistrations, users } from "../drizzle/schema";
+import { ENV } from './_core/env';
 
-export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined,
-  max: Number(process.env.DB_POOL_SIZE ?? 10),
-});
+let _db: ReturnType<typeof drizzle> | null = null;
 
-export async function query<T extends QueryResultRow = QueryResultRow>(text: string, values: unknown[] = []) {
-  return pool.query<T>(text, values);
+// Lazily create the drizzle instance so local tooling can run without a DB.
+export async function getDb() {
+  if (!_db && process.env.DATABASE_URL) {
+    try {
+      _db = drizzle(process.env.DATABASE_URL);
+    } catch (error) {
+      console.warn("[Database] Failed to connect:", error);
+      _db = null;
+    }
+  }
+  return _db;
 }
 
-export async function withTransaction<T>(fn: (client: PoolClient) => Promise<T>) {
-  const client = await pool.connect();
+export async function upsertUser(user: InsertUser): Promise<void> {
+  if (!user.openId) {
+    throw new Error("User openId is required for upsert");
+  }
+
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot upsert user: database not available");
+    return;
+  }
+
   try {
-    await client.query('BEGIN');
-    const result = await fn(client);
-    await client.query('COMMIT');
-    return result;
+    const values: InsertUser = {
+      openId: user.openId,
+    };
+    const updateSet: Record<string, unknown> = {};
+
+    const textFields = ["name", "email", "loginMethod"] as const;
+    type TextField = (typeof textFields)[number];
+
+    const assignNullable = (field: TextField) => {
+      const value = user[field];
+      if (value === undefined) return;
+      const normalized = value ?? null;
+      values[field] = normalized;
+      updateSet[field] = normalized;
+    };
+
+    textFields.forEach(assignNullable);
+
+    if (user.lastSignedIn !== undefined) {
+      values.lastSignedIn = user.lastSignedIn;
+      updateSet.lastSignedIn = user.lastSignedIn;
+    }
+    if (user.role !== undefined) {
+      values.role = user.role;
+      updateSet.role = user.role;
+    } else if (user.openId === ENV.ownerOpenId) {
+      values.role = 'admin';
+      updateSet.role = 'admin';
+    }
+
+    if (!values.lastSignedIn) {
+      values.lastSignedIn = new Date();
+    }
+
+    if (Object.keys(updateSet).length === 0) {
+      updateSet.lastSignedIn = new Date();
+    }
+
+    await db.insert(users).values(values).onDuplicateKeyUpdate({
+      set: updateSet,
+    });
   } catch (error) {
-    await client.query('ROLLBACK');
+    console.error("[Database] Failed to upsert user:", error);
     throw error;
-  } finally {
-    client.release();
   }
 }
 
-export const canonicalJson = (value: unknown) => JSON.stringify(value, Object.keys(value as object).sort());
-export const sha256 = (value: string) => createHash('sha256').update(value).digest('hex');
-export const createShareToken = () => randomBytes(32).toString('base64url');
-export const hashShareToken = (token: string) => sha256(token);
+export async function getUserByOpenId(openId: string) {
+  const db = await getDb();
+  if (!db) {
+    console.warn("[Database] Cannot get user: database not available");
+    return undefined;
+  }
 
-export async function runMigrations() {
-  const schemaPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'schema.sql');
-  await query(await readFile(schemaPath, 'utf8'));
+  const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
+
+  return result.length > 0 ? result[0] : undefined;
 }
 
-export async function closePool() {
-  await pool.end();
+export async function createTrialRegistration(input: InsertTrialRegistration) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database is not available");
+  }
+
+  const result = await db.insert(trialRegistrations).values(input);
+  return { id: Number(result[0].insertId) };
+}
+
+export async function listSeniorPlayers(season: string, publishedOnly = true) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database is not available");
+  }
+
+  return db
+    .select()
+    .from(seniorPlayers)
+    .where(
+      publishedOnly
+        ? and(eq(seniorPlayers.season, season), eq(seniorPlayers.isPublished, 1))
+        : eq(seniorPlayers.season, season),
+    )
+    .orderBy(asc(seniorPlayers.displayOrder), desc(seniorPlayers.createdAt));
+}
+
+export async function createSeniorPlayer(input: InsertSeniorPlayer) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database is not available");
+  }
+
+  const result = await db.insert(seniorPlayers).values(input);
+  return { id: Number(result[0].insertId) };
+}
+
+export async function deleteSeniorPlayer(id: number) {
+  const db = await getDb();
+  if (!db) {
+    throw new Error("Database is not available");
+  }
+
+  await db.delete(seniorPlayers).where(eq(seniorPlayers.id, id));
+  return { success: true as const };
+}
+
+export async function listFixtures() {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+
+  return db.select().from(fixtures).orderBy(asc(fixtures.fixtureDate), asc(fixtures.fixtureTime), asc(fixtures.id));
+}
+
+export async function createFixture(input: InsertFixture) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+
+  const result = await db.insert(fixtures).values(input);
+  return { id: Number(result[0].insertId) };
+}
+
+export async function deleteFixture(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+
+  await db.delete(fixtures).where(eq(fixtures.id, id));
+  return { success: true as const };
 }

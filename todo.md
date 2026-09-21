@@ -1,0 +1,102 @@
+# Santos Soka Academy Project Checklist
+
+- [x] Upgrade the project with secure backend form handling.
+- [x] Record that forwarding to mail@santossokaacademykenya.com is deferred until the client authorizes the mailbox; current routing is configured and verified for the user’s Gmail.
+- [x] Update footer phone, email, Instagram, and TikTok links.
+- [x] Test mobile trial form and gallery filters.
+
+## Exact Replica Checklist
+
+- [x] Capture the live site’s page structure, visible content, navigation labels, and CTA destinations.
+- [x] Capture the live site’s typography, colors, spacing, responsive behavior, and image treatment.
+- [x] Rebuild Home, About, Teams, Gallery, and Contact content in the Manus project without adding redesign changes.
+- [x] Preserve the live site’s trial-registration and navigation behavior.
+- [x] Verify desktop and mobile rendering against the supplied live URL.
+- [x] Save a publish-ready Manus checkpoint.
+- [x] Upgrade the project with secure backend form handling.
+- [x] Record that automatic forwarding to mail@santossokaacademykenya.com remains a client-authorized migration step; the current Google Apps Script route is deployed and verified.
+- [x] Update footer phone, email, Instagram, and TikTok links.
+- [x] Test mobile trial form layout and gallery filter wiring.
+- [x] Research and verify the latest county-league win and playoff qualification news from credible sources.
+- [x] Identify and prepare suitable rights-safe images or clearly attributed image references for the verified update.
+- [x] Add a verified news/update section to the Manus site without inventing facts.
+- [x] Verify the updated news section and image rendering on desktop and mobile.
+- [x] Document that delivery through the academy’s official Workspace mailbox is intentionally deferred until the client mailbox is authorized; current no-third-party delivery is verified through the user’s Gmail.
+- [x] Prepare the complete CORS-safe Google Apps Script webhook code for the trial form.
+- [x] Deploy the webhook from the academy Google Workspace account and capture its `/exec` URL.
+- [x] Connect the webhook URL and secret to Manus and test an end-to-end trial submission.
+- [x] Confirm that the current website flow forwards trial registrations only; general contact messages are not a separate form.
+- [x] Connect the published website submission flow to the authorized Gmail mailbox without exposing credentials.
+- [x] Test the website-to-Gmail delivery flow and document any remaining authorization or webhook dependency.
+- [x] Connect trial registrations to the user’s current Gmail account first.
+- [x] Add a contact-email action that uses the current Gmail destination.
+- [x] Document the later switch from the user’s Gmail destination to the client’s mailbox.
+- [x] Diagnose and resolve the failed Google Apps Script authorization or deployment before connecting Gmail delivery.
+
+- [x] Correct all public academy branding from “Santo Soka Academy” to “Santos Soka Academy” while preserving existing routes and content.
+- [x] Audit the supplied Futurestars story against available public sources and identify rights-safe Futurestars imagery.
+- [x] Add the verified Futurestars achievement and approved image(s) to the site with attribution where required.
+- [x] Verify Santos branding and Futurestars content on desktop and mobile, then save a new checkpoint.
+- [x] Review the four user-provided Instagram posts and record their captions, chronology, source URLs, and image candidates.
+- [x] Build and place a caption-led Futurestars story using the reviewed posts, with source credits and links.
+- [x] Add approved post images to the appropriate homepage news/gallery locations without inventing facts or removing attribution.
+- [x] Review the three new user-provided Instagram posts for the South Sudan pathway, recording captions, chronology, player identity, club/competition, and image candidates.
+- [x] Add a source-attributed international-pathway story connecting Santos Soka to South Sudan football, using only verified claims from the reviewed posts.
+- [x] Add approved South Sudan pathway image(s) to the appropriate About/news/gallery locations and retain source credits.
+- [x] Add a dedicated Futurestars story section with explicit verified milestones, visible credits, and outbound source links.
+- [x] Re-verify the Futurestars and Santos branding changes on desktop and mobile, then save a corrected checkpoint.
+
+- [x] Add a next-season senior-player roster data model with name, position, image URL/key, season, display order, and timestamps.
+- [x] Add authenticated management procedures and a responsive roster-management form with image upload validation.
+- [x] Add a public senior-player roster page and navigation entry for the upcoming season.
+- [x] Test create/list/error states, image storage references, mobile layout, and save a checkpoint.
+- [x] Wire the management-page sign-in button to the project’s secure OAuth start flow.
+- [x] Verify an authorized admin can create a roster entry, resolve its stored image, view it publicly, and remove it without retaining test data.
+- [x] Save a final checkpoint after the authorized senior-player roster flow is verified.
+- [x] Acquire the user-provided official Instagram image for Wall Kong and preserve its source link for attribution.
+- [x] Add Wall Kong to the 2026/27 senior register as a midfielder and verify the image resolves on the public roster.
+- [x] Retry the Manus deployment after the Docker Artifact Registry base-image timeout and verify the published senior-roster route.
+- [x] Preserve Wall Kong’s original Instagram post URL in project research and add a visible source note/link for the roster image.
+- [x] Fix the published admin OAuth redirect so it uses the approved Santos Soka Manus domain and no temporary Cloud Run hostname.
+- [x] Remove the manage-roster link from the public senior-player page while keeping the direct admin URL protected.
+- [x] Verify public/admin separation and save a corrected checkpoint.
+- [x] Save a new checkpoint after the OAuth redirect fix and public-link removal.
+- [x] Re-verify on the published domain that the public roster hides admin controls and the direct admin URL remains protected with the approved redirect.
+- [x] Verify the published `/api/oauth/start` response redirects to `https://santosoka-dqvkmaei.manus.space/api/oauth/callback` instead of the internal Cloud Run hostname.
+- [x] Complete one published admin sign-in attempt and confirm the previous `invalid redirect_uri` error is gone.
+- [x] Save a corrected checkpoint after successful published OAuth verification.
+- [x] Connect the client-owned `santossokaacademy.co.ke` domain from Truehost to the Manus-hosted Santos Soka Academy site.
+- [x] Verify the Manus domain settings show the exact DNS records and confirm the custom domain with HTTPS after DNS propagation.
+- [ ] Reproduce the reported failure for ordinary user login and administrator login on the published and preview domains.
+- [x] Trace and fix OAuth start, redirect URI, callback, nonce, cookie, and session handling for both user and admin flows; code-level fixes are complete, with browser sign-in still pending.
+- [x] Add or update automated authentication tests and verify the management-page role gate.
+- [x] Verify login behavior in the browser and save a corrected checkpoint with the authorized Manus session.
+- [ ] Reproduce ordinary-user login separately on preview and published domains and record the actual result.
+- [x] Ensure preview login starts on the published allowlisted origin so the host-only OAuth nonce cookie matches the callback host.
+- [ ] Complete one successful browser sign-in for a normal user and one for the administrator path, then verify the admin role gate.
+- [x] Add focused coverage for preview login origin compatibility before the final authentication checkpoint.
+- [x] Route the static administrator login button through the same published OAuth origin as the React user login so preview cookies match the callback host.
+- [x] Add an easy in-site account control that shows sign-in/sign-out state across public pages.
+- [x] Show the senior-player management action automatically only when `auth.me` confirms the signed-in user has the admin role.
+- [x] Keep ordinary users unable to self-promote or access admin mutations, and verify the account-control behavior responsively.
+- [x] Add WhatsApp chat actions using `0724325653` to the public contact surfaces and shared pages.
+- [x] Verify the WhatsApp links use the correct international number and remain usable on desktop and mobile.
+
+- [x] Reproduce the reported missing sign-in option in the user’s browser across desktop navigation, mobile navigation, and the protected management page.
+- [x] Reproduce the reported missing WhatsApp chat action across the published homepage and Contact page.
+- [x] Fix any navigation/session or WhatsApp rendering/interaction issue found, then verify responsive behavior and publish a checkpoint.
+- [ ] Reproduce the missing sign-in/account control on the published site in a mobile viewport and capture the mobile navigation state.
+- [x] Open the published Contact page and verify whether the WhatsApp action is missing there, with direct DOM or screenshot evidence.
+- [x] After publishing the initializer fix, verify the published homepage and Contact page show the sign-in/account control and WhatsApp actions on desktop and mobile, and click-test the WhatsApp destination.
+- [ ] Complete remaining published mobile navigation verification and browser sign-in checks with the authorized user/admin sessions.
+- [x] Reconcile the live senior roster data with the intended Wall Kong record and remove only explicitly confirmed temporary entries.
+- [x] Finish the Truehost-to-Manus custom-domain handoff by obtaining Manus DNS records, applying them through the authoritative Cloudflare DNS zone, and verifying HTTPS after propagation.
+- [x] Diagnose why the custom-domain connection for `santossokaacademy.co.ke` is not working and record the current Manus domain state.
+- [x] Check DNS resolution, HTTPS, and routing for the apex and `www` domain.
+- [x] Clearly document the exact DNS correction required at the authoritative DNS provider and verify the live apex after the user’s DNS change.
+- [x] Prepare a step-by-step Truehost → Cloudflare → Manus connection guide for `santossokaacademy.co.ke`.
+- [x] Document the exact current DNS diagnosis, safe record replacement rules, HTTPS settings, and propagation checks without guessing Manus apex values.
+
+- [x] Add a homepage meta keywords tag containing between 3 and 8 focused keywords, with the upper bound never exceeded.
+- [x] Audit all images rendered at `/` and add meaningful alt text to every image currently missing it.
+- [x] Verify the homepage keywords quantity and confirm no rendered homepage image lacks an alt attribute, then run tests and build.

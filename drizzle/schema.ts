@@ -1,0 +1,75 @@
+import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+
+/**
+ * Core user table backing auth flow.
+ * Extend this file with additional tables as your product grows.
+ * Columns use camelCase to match both database fields and generated types.
+ */
+export const users = mysqlTable("users", {
+  /**
+   * Surrogate primary key. Auto-incremented numeric value managed by the database.
+   * Use this for relations between tables.
+   */
+  id: int("id").autoincrement().primaryKey(),
+  /** Manus OAuth identifier (openId) returned from the OAuth callback. Unique per user. */
+  openId: varchar("openId", { length: 64 }).notNull().unique(),
+  name: text("name"),
+  email: varchar("email", { length: 320 }),
+  loginMethod: varchar("loginMethod", { length: 64 }),
+  role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
+});
+
+export type User = typeof users.$inferSelect;
+export type InsertUser = typeof users.$inferInsert;
+
+export const trialRegistrations = mysqlTable("trialRegistrations", {
+  id: int("id").autoincrement().primaryKey(),
+  playerName: varchar("playerName", { length: 160 }).notNull(),
+  dateOfBirth: varchar("dateOfBirth", { length: 10 }).notNull(),
+  category: varchar("category", { length: 40 }).notNull(),
+  guardianName: varchar("guardianName", { length: 160 }).notNull(),
+  phone: varchar("phone", { length: 40 }).notNull(),
+  email: varchar("email", { length: 320 }),
+  message: text("message"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type TrialRegistration = typeof trialRegistrations.$inferSelect;
+export type InsertTrialRegistration = typeof trialRegistrations.$inferInsert;
+
+export const seniorPlayers = mysqlTable("seniorPlayers", {
+  id: int("id").autoincrement().primaryKey(),
+  season: varchar("season", { length: 20 }).notNull(),
+  playerName: varchar("playerName", { length: 160 }).notNull(),
+  position: varchar("position", { length: 60 }).notNull(),
+  imageKey: varchar("imageKey", { length: 512 }).notNull(),
+  imageUrl: varchar("imageUrl", { length: 512 }).notNull(),
+  displayOrder: int("displayOrder").default(0).notNull(),
+  isPublished: int("isPublished").default(1).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type SeniorPlayer = typeof seniorPlayers.$inferSelect;
+export type InsertSeniorPlayer = typeof seniorPlayers.$inferInsert;
+
+export const fixtures = mysqlTable("fixtures", {
+  id: int("id").autoincrement().primaryKey(),
+  fixtureDate: varchar("fixtureDate", { length: 10 }).notNull(),
+  fixtureTime: varchar("fixtureTime", { length: 5 }).notNull(),
+  team: varchar("team", { length: 40 }).notNull(),
+  opponent: varchar("opponent", { length: 160 }).notNull(),
+  venue: varchar("venue", { length: 80 }).notNull(),
+  competition: varchar("competition", { length: 120 }).notNull(),
+  status: mysqlEnum("status", ["Upcoming", "FT", "Postponed"]).default("Upcoming").notNull(),
+  score: varchar("score", { length: 20 }),
+  scorers: text("scorers"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Fixture = typeof fixtures.$inferSelect;
+export type InsertFixture = typeof fixtures.$inferInsert;
